@@ -17,10 +17,12 @@
     "react-native-web": "^0.11.4",
     "react-navigation": "^3.11.1",
     "react-redux": "^7.1.0",
-    "redux": "^4.0.4"
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "babel-preset-expo": "^5.1.1",
+    "react-devtools": "^3.6.2"
   },
   "private": true
 }
