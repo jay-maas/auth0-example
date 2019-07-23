@@ -3,7 +3,10 @@ import { AuthSession } from "expo";
 import jwtDecode from "jwt-decode";
 import reducer, { loginStart, loginError, loginSuccess, editProfileStart, editProfileError, editProfileSuccess, logoutStart, logoutSuccess } from './reducer.js'
 
-const store = createStore(reducer)
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  )
 
 /**
  * Converts an object to a query string to be used by the request to auth0 via the dashboard application
