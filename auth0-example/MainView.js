@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View, Button, Alert, Image } from "react-native";
 import { login } from './store'
 import { connect } from 'react-redux'
-import RCTNetworking from 'RCTNetworking'
 
 class App extends React.Component {
   static navigationOptions = () => {
@@ -24,10 +23,6 @@ class App extends React.Component {
     access_token: null,
     registrationCompleted: null
   };
-
-  componentDidMount() {
-    RCTNetworking.clearCookies(()=>{})
-  }
 
   loginHandler = () => {
     login(this.props.navigation)
@@ -65,6 +60,9 @@ class App extends React.Component {
 const mapState = state => ({
   loggingIn: state.loggingIn
 }) 
+
+// Leo wrote this
+
 
 export default connect(mapState)(App)
 
