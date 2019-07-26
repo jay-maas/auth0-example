@@ -4,7 +4,7 @@ const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 
 export const loginStart = () => ({ type: LOGIN_START })
 export const loginError = error => ({ type: LOGIN_ERROR, error })
-export const loginSuccess = organization => ({ type: LOGIN_SUCCESS, organization })
+export const loginSuccess = user => ({ type: LOGIN_SUCCESS, user })
 
 const EDIT_PROFILE_START = 'EDIT_PROFILE_START'
 const EDIT_PROFILE_ERROR = 'EDIT_PROFILE_ERROR'
@@ -25,8 +25,9 @@ const initialState = {
     loggingIn: false,
     editingProfile: false,
     loggingOut: false,
-    orgName: null,
-    accessToken: null,
+    picture: null,
+    name: null,
+    role: null,
     orgEmail: null,
     orgLocation: null
 }
@@ -49,8 +50,9 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loggingIn: false,
-                orgName: action.organization.name,
-                accesToken: action.organization.accessToken,
+                name: action.user.name,
+                role: action.user.role,
+                picture: action.user.picture,
                 error: ''
             }
         case EDIT_PROFILE_START:
@@ -69,7 +71,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 editingProfile: false,
-                orgName: action.completeOrg.orgName,
+                name: action.completeOrg.name,
                 orgEmail: action.completeOrg.orgEmail,
                 orgLocation: action.completeOrg.orgLocation,
                 error: ''
@@ -87,8 +89,9 @@ const reducer = (state = initialState, action) => {
                 loggingIn: false,
                 editingProfile: false,
                 loggingOut: false,
-                orgName: null,
-                accessToken: null,
+                picture: null,
+                name: null,
+                role: null,
                 orgEmail: null,
                 orgLocation: null
             }

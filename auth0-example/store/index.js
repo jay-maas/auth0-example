@@ -51,7 +51,7 @@ export const login = async (navigation) => {
 
     // Perform the authentication
     const response = await AuthSession.startAsync({ authUrl });
-    console.log("Authentication response", response);
+    // console.log("Authentication response", response);
 
     //if successful then it will call the next function!!!
     //this should contain the access token and the id token
@@ -68,17 +68,31 @@ export const login = async (navigation) => {
       //set the access token to be assigned to state for later use
       const access_token = response.params.access_token;
       // Retrieve the JWT token and decode it using the jwtToken imported above
-      const jwtToken = response.params.id_token;
+      const id_token = response.params.id_token;
       //decodes the token so we can access the available attributes of the users Auth0 profile
-      const decoded = jwtDecode(jwtToken);
-    //   console.log("*******************", decoded);
+      const idDecoded = jwtDecode(id_token);
+      const accessDecoded = jwtDecode(access_token)
+      // console.log("********    ID TOKEN    ***********", idDecoded);
+      // console.log("********    ACCESS TOKEN    ***********", accessDecoded);
+      const role = accessDecoded.permissions[0] && accessDecoded.permissions[0].replace('role:', '')
+      console.log(idDecoded.name,"*******************",role)
       const chosenDecoded = {
-          name: decoded.name,
-          accessToken: access_token
+          name: idDecoded.name,
+          picture: idDecoded.picture,
+          role: role || "supporter"
       }
       
       store.dispatch(loginSuccess(chosenDecoded))
-      navigation.navigate('Edit')
+
+      if(role === 'organization') {
+        console.log('test1', role)
+        return navigation.navigate('OrgApp')
+      }  else if (role === 'supporter') {
+        console.log('test2', role)
+        return navigation.navigate('GuestApp' )
+      } else if (!role){
+        return navigation.navigate('GuestApp')
+      }
     }
   };
 
@@ -88,7 +102,7 @@ export const editProfile = async (updatedInfo, navigation) => {
         console.log(updatedInfo)
         if (updatedInfo && updatedInfo.orgName && updatedInfo.orgLocation && updatedInfo.orgEmail) {
             store.dispatch(editProfileSuccess(updatedInfo))
-            navigation.navigate('OrgApp')
+            navigation.navigate('OrganizationLoggedIn')
         } else {
             throw "Must contain all items in order to complete profile"
         }

@@ -13,7 +13,8 @@ class App extends React.Component {
     headerTintColor: "#fff",
     headerTitleStyle: {
       fontWeight: "bold"
-    }}
+    },
+  }
   };
   state = {
     name: null,
@@ -23,10 +24,6 @@ class App extends React.Component {
     registrationCompleted: null
   };
 
-  guestView = () => {
-    this.props.navigation.navigate('GuestApp')
-  }
-
   loginHandler = () => {
     login(this.props.navigation)
   }
@@ -34,7 +31,6 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.props.accessToken && this.props.navigation.navigate('OrgApp')}
         <View style={styles.viewsContainer}>
           <Text style={styles.mainViewText}>I am an organization</Text>
             <View style={styles.buttonContainer}>
@@ -51,7 +47,7 @@ class App extends React.Component {
           <View style={styles.buttonContainer}>
             <Button 
             title="View Posts"
-            onPress={this.guestView}
+            onPress={this.loginHandler}
             color="white"
             />
           </View>
@@ -62,9 +58,11 @@ class App extends React.Component {
 }
 
 const mapState = state => ({
-  loggingIn: state.loggingIn,
-  accessToken: state.accessToken
+  loggingIn: state.loggingIn
 }) 
+
+// Leo wrote this
+
 
 export default connect(mapState)(App)
 

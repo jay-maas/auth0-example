@@ -27,12 +27,9 @@ const GuestStack = createStackNavigator({
 })
 //Screen value is the name of the Component
 const OrgStack = createStackNavigator({
+  EditProfile: EditProfile,
   OrganizationLoggedIn: OrganizationLoggedIn
 })
-
-const EditStack = createStackNavigator({
-  EditProfile: EditProfile
- })
 
 const AuthStack = createStackNavigator({
   MainView: MainView
@@ -40,7 +37,6 @@ const AuthStack = createStackNavigator({
 
 const AppContainer = createAppContainer(createSwitchNavigator(
   {
-    Edit: EditStack,
     OrgApp: OrgStack,
     GuestApp: GuestStack,
     Auth:  AuthStack
