@@ -24,6 +24,10 @@ class App extends React.Component {
     registrationCompleted: null
   };
 
+  componentDidMount() {
+    login(this.props.navigation)
+  }
+
   loginHandler = () => {
     login(this.props.navigation)
   }
