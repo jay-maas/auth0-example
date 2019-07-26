@@ -6,6 +6,7 @@ import MainView  from './MainView'
 import EditProfile from './EditProfile'
 import LoggedInView from './LoggedInView'
 import OrganizationLoggedIn from './OrganizationLoggedIn'
+import Loading from './LoadingScreen'
 
 
 
@@ -35,14 +36,19 @@ const AuthStack = createStackNavigator({
   MainView: MainView
 })
 
+const LoadingStack = createStackNavigator({
+  Loading: Loading
+})
+
 const AppContainer = createAppContainer(createSwitchNavigator(
   {
     OrgApp: OrgStack,
     GuestApp: GuestStack,
-    Auth:  AuthStack
+    Auth:  AuthStack,
+    Loading: LoadingStack
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'Loading',
     headerTitle: 'Key Conservation'
    }
 ))
