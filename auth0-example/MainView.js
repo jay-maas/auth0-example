@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Alert, Image } from "react-native";
 import { login } from './store'
 import { connect } from 'react-redux'
 
+
 class App extends React.Component {
   static navigationOptions = () => {
     return { 
