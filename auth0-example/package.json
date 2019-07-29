@@ -26,5 +26,8 @@
     "babel-preset-expo": "^5.1.1",
     "react-devtools": "^3.6.2"
   },
-  "private": true
-}
+  "private": true,
+  "expo": {
+    "scheme": "auth0Example"
+    }
+  }
