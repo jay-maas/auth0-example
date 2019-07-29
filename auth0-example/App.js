@@ -1,12 +1,13 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import store from './store'
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation'
+import { createStackNavigator, createAppContainer, createSwitchNavigator,  } from 'react-navigation'
 import MainView  from './MainView'
 import EditProfile from './EditProfile'
 import LoggedInView from './LoggedInView'
 import OrganizationLoggedIn from './OrganizationLoggedIn'
 import Loading from './LoadingScreen'
+import { Linking } from 'expo'
 
 
 
@@ -16,7 +17,7 @@ export default class App extends React.Component {
      <Provider store={ store }>
        <AppContainer
          onNavigationStateChange={console.log('changed')}
-         uriPrefix="/app"
+         uriPrefix={prefix}
        />
      </Provider>
    )
@@ -24,12 +25,18 @@ export default class App extends React.Component {
 }
 
 const GuestStack = createStackNavigator({
-  LoggedInView: LoggedInView
+  LoggedInView: {
+    screen: LoggedInView,
+    path: 'guestuser'
+  },
+  
 })
 //Screen value is the name of the Component
 const OrgStack = createStackNavigator({
   EditProfile: EditProfile,
-  OrganizationLoggedIn: OrganizationLoggedIn
+  OrganizationLoggedIn: OrganizationLoggedIn,
+
+
 })
 
 const AuthStack = createStackNavigator({
@@ -43,7 +50,7 @@ const LoadingStack = createStackNavigator({
 const AppContainer = createAppContainer(createSwitchNavigator(
   {
     OrgApp: OrgStack,
-    GuestApp: GuestStack,
+    GuestApp: { screen: GuestStack, path: 'guest' },
     Auth:  AuthStack,
     Loading: LoadingStack
   },
@@ -52,3 +59,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
     headerTitle: 'Key Conservation'
    }
 ))
+
+const prefix = Linking.makeUrl('/')
+
+console.log("prefix", prefix)
